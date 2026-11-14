@@ -1,0 +1,14 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+
+# Node.js / Generated output
+node_modules/
+FileWriter/Offline version/thisBuffer.js
+
+# Logs
+*.log
+npm-debug.log*

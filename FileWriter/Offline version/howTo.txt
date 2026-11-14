@@ -1,0 +1,6 @@
+
+ - Right clic in the folder*
+
+ - Open in Terminal
+
+ - Enter "node fileWriter.js"
