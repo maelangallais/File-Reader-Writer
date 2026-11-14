@@ -6,15 +6,20 @@ These tools are primarily intended to help embed binary/audio assets directly in
 
 ## 📂 Tools Included
 
-### 1. FileReader (`FileReader/`) *(Created October 21, 2025)*
+### 1. FileReader
+[`FileReader/`](FileReader/) · *Created October 21, 2025*
+
 A browser-based binary and hexadecimal file inspector.
 - Reads any selected file as an `ArrayBuffer` using the browser `FileReader` API and `DataView`.
-- Displays every byte in a column layout showing:
+- Supports segmented rendering via `WriteOnPage(file, start = 0, end = file.byteLength)` to avoid rendering an entire large file at once.
+- Displays each byte in a column layout showing:
   1. Byte offset (decimal index)
   2. Two-digit uppercase hexadecimal value (custom `DecToHex` converter)
   3. ASCII character representation (`String.fromCharCode`)
 
-### 2. FileWriter — Browser Version (`FileWriter/Browser version/`) *(Created June 4, 2026)*
+### 2. FileWriter (Browser Version)
+[`FileWriter/Browser version/`](FileWriter/Browser%20version/) · *Created June 4, 2026*
+
 A single-file browser converter that turns any selected file into a downloadable JavaScript module.
 - Reads the file via `FileReader.readAsDataURL()`.
 - Generates and downloads `<filename>.js` containing:
@@ -26,7 +31,9 @@ A single-file browser converter that turns any selected file into a downloadable
   window.thisBuffer = thisBuffer;
   ```
 
-### 3. FileWriter — Offline Version (`FileWriter/Offline version/`) *(Created June 4, 2026)*
+### 3. FileWriter (Offline Version)
+[`FileWriter/Offline version/`](FileWriter/Offline%20version/) · *Created June 4, 2026*
+
 A Node.js batch compiler for bundling multiple files at once.
 - Reads all files placed inside the `folder/` directory.
 - Encodes each file to Base64 and writes a combined `thisBuffer.js` exposing `window.thisBuffer`.
@@ -45,6 +52,5 @@ A Node.js batch compiler for bundling multiple files at once.
 
 ## ⚠️ Notes & Limitations
 
-- **FileReader performance**: Creates one DOM element (`.column` with 3 child `<div>`s) per byte of the selected file, so opening large files will be slow or freeze the browser tab.
+- **FileReader performance**: Creates one DOM element (`.column` with 3 child `<div>`s) per rendered byte; use the `start` and `end` parameters on `WriteOnPage` when inspecting large files.
 - **Offline FileWriter MIME types**: `fileWriter.js` explicitly maps `.wav` (`audio/wav`) and `.ogg` (`audio/ogg`), and defaults all other extensions to `audio/mp3`.
-- **Browser FileWriter HTML**: `FileWriter/Browser version/HTML.html` retains the original `<title>Lecteur de fichiers</title>` and meta description from `FileReader`.

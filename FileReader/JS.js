@@ -26,11 +26,10 @@ fileInput.addEventListener("change", async (event) => {
 });
 
 
-function WriteOnPage(file) {
+function WriteOnPage(file, start = 0, end = file.byteLength) {
     const container = document.querySelector('#container');
-    
-    const fileLength = file.byteLength;
-    for (let i = 0; i < fileLength; i++) {
+
+    for (let i = start; i < end; i++) {
         const byte = file.getUint8(i);
         const hexa = DecToHex(byte);
         const char = String.fromCharCode(byte);
